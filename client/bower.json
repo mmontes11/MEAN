@@ -1,0 +1,22 @@
+{
+  "name": "YourApp",
+  "version": "0.0.1",
+  "description": "Description of YourApp", 
+  "dependencies": {
+  	"angular": "latest",
+  	"angular-route": "latest",
+    "angular-loader": "latest",
+    "angular-cookies": "latest",
+    "angular-mocks": "latest",
+  	"angular-resource": "latest",
+    "angular-bootstrap": "latest",
+    "angular-i18n" : "latest",   
+    "jquery": "2.1.1",
+    "bootstrap" : "latest",
+    "underscore" : "~1.7.*",
+    "requirejs": "~2.1.*",
+    "requirejs-domready": "~2.0.*",
+    "underscore.string" : "~2.*"
+  }
+}
+

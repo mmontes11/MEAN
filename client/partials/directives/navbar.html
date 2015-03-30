@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/inputData" ng-show="isAuthenticated()">YourApp</a>
+			<a class="navbar-brand" href="#/logIn" ng-show="!isAuthenticated()">YourApp</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">  	 
+			<div class="navbar-form navbar-right" ng-show="isAuthenticated()">
+		        <button type="submit" class="btn btn-danger" ng-click="logOut()">
+		        	Log Out <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+		        </button>
+	    	</div>
+	    	<p class="navbar-right navbar-text" ng-show="isAuthenticated()">{{currentUser}}</p>
+	    	<div ng-show="isAuthenticated()">
+	    		<ul class="nav navbar-nav">
+					<li ng-class="{ active: isActive('/info') }">
+						<a href="#/info">Auth Page</a>
+					</li>
+				</ul>
+	    	</div>
+		</div>
+	</div>
+</nav>

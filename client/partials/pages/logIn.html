@@ -1,0 +1,17 @@
+<div class="formContainer text-center">
+        <div class="alert alert-danger center" ng-show="notValidCredentials">                               
+                Invalid Credentials
+        </div>
+	<form ng-submit="logIn(username,password)" name="LogInForm" class="form-signin" novalidate>
+                <input type="text" name="username" ng-model="username" class="form-control" 
+                        placeholder="Nombre de usuario" required autofocus>
+                <input type="password" name="password" ng-model="password" class="form-control" 
+                        placeholder="Contraseña" required>
+                <button class="btn btn-lg btn-success btn-block" type="submit" 
+                	ng-disabled="disableButtonLogin()" ng-click="logIn(username,password)">
+                	Log In <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </button>
+                <p><input type="checkbox" ng-model="remember" ng-change="rememberMe()"> Remind me</input></p>
+                <p><a ng-show="isAllowedSignUp" href="#/signUp">Sign Up</a></p>
+	</form>
+</div>

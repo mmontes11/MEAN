@@ -1,0 +1,111 @@
+/* app css stylesheet */
+
+/*container style*/
+
+body {
+	font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+	background: #f5f5f5;
+}
+
+#container {
+	width: auto 90%;
+	height: auto;
+	padding: 5% 5% 5% 5%;
+}
+
+.left {
+	position: relative;
+	float: left;
+	width: 30%;
+	height: auto;
+	margin-right: 5%;
+	border-radius: 1%;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	position: relative;
+	float: right;
+	width: 65%;
+	height: auto;
+	margin-bottom: 2%;
+	padding: 1%;
+	border-radius: 1%;
+}
+
+/* form style */
+
+.formContainer {
+	padding: 10% 30% 0% 30%;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove !important;
+    padding: 0 2.2em 1.4em 2.2em;
+    margin: 0 0 1.5em 0 !important;
+    width: 100%;
+}
+
+
+legend.scheduler-border {
+	background-image: linear-gradient(to bottom, #428bca 0%, #2d6ca2 100%);
+    background-repeat: repeat-x;
+	border-color: #2b669a;
+	width: 50%;
+    color: #fff;
+  	padding: 0.5% 0.5%;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0 0 0 3px #ddd;
+}
+
+.panel-group {
+	margin-bottom: 0;
+}
+
+.buttonsCenter {
+	width: 50%;
+	margin: 5% 25% 0% 25%;
+}
+
+.buttonHalf {
+	width:50%;
+}
+
+.tabs {
+	text-align: center;
+	margin-bottom: 0%;
+	padding-bottom: 0%;
+}
+
+.alert {
+	padding: 1% 1% 1% 1%;
+	margin: 2% 2% 2% 2%;
+}
+
+.buttonLink {
+    background:none!important;
+     border:none; 
+     padding:0!important;
+    /*border is optional*/
+     border-bottom:1px solid #444; 
+     cursor: pointer;
+}
+
+/* chart style */
+
+.chart {
+	box-shadow: 0 0 0 2px #ddd;
+}
+
+
+/* dialog style */
+.modal .modal-body {
+    max-height: 80%;
+    overflow-y: auto;
+}
