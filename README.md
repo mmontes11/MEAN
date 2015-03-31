@@ -28,7 +28,7 @@ Make sure you have installed all of the following prerequisites on your developm
 * Bower - You're going to use the [Bower Package Manager](http://bower.io/) to manage your front-end packages. Make sure you've installed Node.js and npm first, then install bower globally using npm:
 
 ### Instructions
-* First, you'll need to download all dependecies in both the client and the server:
+* First, you'll need to download all dependecies for both the client and the server:
 ```bash
 $ cd mean-archetype
 $ npm install
