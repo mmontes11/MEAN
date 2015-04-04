@@ -1,4 +1,4 @@
-# MEAN-archetype
+# MEAN
 
 A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript archetype with token authentication.
 
