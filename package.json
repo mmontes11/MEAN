@@ -15,7 +15,8 @@
     "body-parser"     : "~1.4.3",
     "morgan"          : "~1.0.1",
     "method-override" : "~2.1.1",
-    "nodemon"         : "~1.2.1" 
+    "nodemon"         : "~1.2.1" ,
+    "socket.io"       : "latest"
   },
   "scripts" : {
     "start"      : "nodemon server.js"

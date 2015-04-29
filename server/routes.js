@@ -1,10 +1,9 @@
-var jwt = require('express-jwt');
 var secret = require('../config/secret');
 
 var routes = {};
 routes.user = require('./services/user');
 
-module.exports = function(app) {
+module.exports = function(app,jwt) {
 
 	// API ---------------------------------------------------------------------
 	//User
