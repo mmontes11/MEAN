@@ -9,21 +9,26 @@ var express  = require('express'),
 	port  	 = process.env.PORT || 8080,			
 	db = require('./config/configDB'),				
 	bodyParser = require('body-parser'),
-	morgan  = require('morgan'),
 	methodOverride = require('method-override'),
+	morgan = require('morgan'),
 	jwt = require('express-jwt');
 
 // config  ======================================================================
-require('./config/config.js')(app,express,bodyParser,methodOverride,morgan);
+app.use(express.static(__dirname + '/client')); 	
+app.use(bodyParser.urlencoded({'extended':'true'})); 
+app.use(bodyParser.json()); 
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
+app.use(methodOverride('X-HTTP-Method-Override')); 
+app.use(morgan());
 
 // db config  ===================================================================
 mongoose.connect(db.url); 
 
 // routes =======================================================================
-require('./server/routes.js')(app,jwt);
+require('./server/routes')(app,jwt);
 
 //cors ==========================================================================
-require('./server/cors.js')(app);
+require('./server/cors')(app);
 
 // listen (start app with node server.js) =======================================
 io.sockets.on('connection', socket);
