@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MEAN-archetype
 
 A simple MEAN(MongoDB + Express + AngularJS + NodeJS) archetype with token authentication.
@@ -57,4 +56,3 @@ mean-archetype/config/secret.js
 npm start
 ```
 * The magic happens at [http://localhost:8080](http://localhost:8080)
->>>>>>> 7d9c20a2659c465274429b6de2e8ec35f276a812
