@@ -28,13 +28,13 @@ services.factory('UserService', function($http,$window,$cookies,Config) {
 services.factory('BrowserService', function($window,$cookies){
     return {
         getSession: function (key){
-            return $window.sessionStorage[key];
+            return $window.localStorage[key];
         },
         setSession: function(key,value){
-            $window.sessionStorage[key] = value;
+            $window.localStorage[key] = value;
         },
         deleteSession: function(key){
-            delete $window.sessionStorage[key];
+            delete $window.localStorage[key];
         },
         remember: function (key, value) {
             if (arguments.length === 1) {
@@ -51,12 +51,12 @@ services.factory('BrowserService', function($window,$cookies){
     }
 });
 
-services.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {
+services.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService, BrowserService) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
-            if ($window.sessionStorage.token) {
-                config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+            if (BrowserService.getSession('token')) {
+                config.headers.Authorization = 'Bearer ' + BrowserService.getSession('token');
             }
             return config;
         },
@@ -65,20 +65,44 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
         },
         /* Set Authentication.isAuthenticated to true if 200 received */
         response: function (response) {
-            if (response != null && response.status == 200 && $window.sessionStorage.token && !AuthenticationService.isAuthenticated) {
+            if (response != null && response.status == 200 && BrowserService.getSession('token') && !AuthenticationService.isAuthenticated) {
                 AuthenticationService.isAuthenticated = true;
             }
             return response || $q.when(response);
         },
         /* Revoke client authentication if 401 is received */
         responseError: function(rejection) {
-            if (rejection != null && rejection.status === 401 && ($window.sessionStorage.token || AuthenticationService.isAuthenticated)) {
-                delete $window.sessionStorage.token;
+            if (rejection != null && rejection.status === 401 && (BrowserService.getSession('token') || AuthenticationService.isAuthenticated)) {
+                BrowserService.deleteSession('token');
                 AuthenticationService.isAuthenticated = false;
                 $location.path("/logIn");
             }
             return $q.reject(rejection);
         }
     };
+});
+
+services.factory('SocketService', function ($rootScope) {
+  var socket = io.connect();
+  return {
+    on: function (eventName, callback) {
+      socket.on(eventName, function () {  
+        var args = arguments;
+        $rootScope.$apply(function () {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function (eventName, data, callback) {
+      socket.emit(eventName, data, function () {
+        var args = arguments;
+        $rootScope.$apply(function () {
+          if (callback) {
+            callback.apply(socket, args);
+          }
+        });
+      })
+    }
+  };
 });
 

@@ -16,8 +16,8 @@ var app = angular.module('app', [
 app.constant("Config", {
   'apiUrl': 'http://localhost:8080',
   'allowedSignUp': true,
-  'defaultAuthRoute': '/logIn',
-  'defaultNonAuthRoute': '/info',
+  'defaultAuthRoute': '/example',
+  'defaultNonAuthRoute': '/logIn',
 })
 
 app.config(['$locationProvider','$routeProvider', function($location,$routeProvider) {
@@ -33,9 +33,9 @@ app.config(['$locationProvider','$routeProvider', function($location,$routeProvi
           access: { requiredLogin: false },
           name: 'signUp'
     })
-    .when('/authPage', {
-          templateUrl: 'partials/pages/authPage.html', 
-          controller: 'AuthPageCtrl',
+    .when('/example', {
+          templateUrl: 'partials/pages/example.html', 
+          controller: 'ExampleCtrl',
           access: { requiredLogin: true }
     })
     .otherwise({redirectTo: '/'});
@@ -54,11 +54,11 @@ app.run(function($rootScope, $location, AuthenticationService, BrowserService, C
         	}
           //Restrict pages when not authenticated
           if (nextRoute.access.requiredLogin && !AuthenticationService.isAuthenticated && !BrowserService.getSession('token')) {
-            $location.path(Config.defaultAuthRoute);
-          } 
-          //Dont show logIn page or signnUp when authenticated
-          if (!nextRoute.access.requiredLogin && AuthenticationService.isAuthenticated) { 
             $location.path(Config.defaultNonAuthRoute);
+          } 
+          //Dont show logIn page or signUp when authenticated
+          if (!nextRoute.access.requiredLogin && AuthenticationService.isAuthenticated) { 
+            $location.path(Config.defaultAuthRoute);
           } 
         } 
     });
@@ -66,9 +66,9 @@ app.run(function($rootScope, $location, AuthenticationService, BrowserService, C
       //Redirect to corresponding default route
       if (!nextRoute.loadedTemplateUrl && nextRoute.redirectTo){
         if (!AuthenticationService.isAuthenticated && !BrowserService.getSession('token')){
-          $location.path(Config.defaultAuthRoute);
-        }else {
           $location.path(Config.defaultNonAuthRoute);
+        }else {
+          $location.path(Config.defaultAuthRoute);
         }
       }
     });

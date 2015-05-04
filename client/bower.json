@@ -16,7 +16,8 @@
     "underscore" : "~1.7.*",
     "requirejs": "~2.1.*",
     "requirejs-domready": "~2.0.*",
-    "underscore.string" : "~2.*"
+    "underscore.string" : "~2.*",
+    "socket.io-client": "latest"
   }
 }
 

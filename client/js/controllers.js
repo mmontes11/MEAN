@@ -4,8 +4,8 @@
 
 var controllers = angular.module('controllers', []);
 
-controllers.controller('NavBarCtrl', ['$scope', '$location','BrowserService','AuthenticationService','UserService', 
-	function ($scope,$location,BrowserService,AuthenticationService,UserService) {
+controllers.controller('NavBarCtrl', ['$scope', '$location','BrowserService','AuthenticationService','UserService','SocketService',
+	function ($scope,$location,BrowserService,AuthenticationService,UserService,SocketService) {
 
 	$scope.isAuthenticated  = function(){
 		return AuthenticationService.isAuthenticated ;
@@ -18,7 +18,8 @@ controllers.controller('NavBarCtrl', ['$scope', '$location','BrowserService','Au
 	}
 
 	$scope.logOut = function() {
-        if (AuthenticationService.isAuthenticated) {            
+        if (AuthenticationService.isAuthenticated) {
+        	SocketService.emit('USER_DISCONNECTED');            
             UserService.logOut()
 	            .success(function(data) {
 	                AuthenticationService.isAuthenticated = false;
@@ -66,7 +67,7 @@ controllers.controller('AdminUserCtrl', ['$scope', '$location', 'BrowserService'
 	                    $location.path("/inputData");
 	                })
 	                .error(function(data, status) {
-	                	if (status === 401){
+	                	if (status >= 400){
 	                		$scope.notValidCredentials = true;
 	                	}
 	                });
@@ -98,7 +99,7 @@ controllers.controller('AdminUserCtrl', ['$scope', '$location', 'BrowserService'
 	                	$scope.logIn(username, password);
 	                })
 	                .error(function(data, status) {
-	                	if (status === 400){
+	                	if (status >= 400){
 	                		$scope.differentPasswords = true;
 	                	}
 	                	if (status === 500 && data.userAlreadyExists){
@@ -118,7 +119,27 @@ controllers.controller('AdminUserCtrl', ['$scope', '$location', 'BrowserService'
     }
 ]);
 
-controllers.controller('AuthPageCtrl', ['$scope', function($scope){
+controllers.controller('ExampleCtrl', ['$scope','BrowserService','SocketService', function($scope,BrowserService,SocketService){
+	$scope.users = [];
+	$scope.numUsers = 0;
 
+	SocketService.emit('USER_CONNECTED', {
+      username: BrowserService.getSession('username')
+    });
+
+    SocketService.on('USER_JOINED', function(socketData){
+    	$scope.users.push(socketData.username);
+    	$scope.numUsers = socketData.numUsers;
+    	console.log("User connected!!!");
+    	console.log("User: "+socketData.username);
+    	console.log("Total users: "+socketData.numUsers);
+    });
+
+    SocketService.on('USER_LEFT', function(socketData){
+    	delete $scope.users[socketData.username];
+      	$scope.numUsers = socketData.numUsers;
+      	console.log("User disconnected");
+    	console.log("User: "+socketData.username);
+    	console.log("Total users: "+socketData.numUsers);
+    });
 }]);
-
