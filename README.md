@@ -3,14 +3,6 @@
 A simple MEAN(MongoDB + Express + AngularJS + NodeJS) archetype with token authentication.
 
 ### Tecnologies
-
-### Instructions
-=======
-# MEAN
-
-A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript archetype with token authentication.
-
-### Tecnologies
 * [MongoDB](http://www.mongodb.org/)
 * [Express](http://expressjs.com/)
 * [AngularJS](https://angularjs.org/)
@@ -20,6 +12,7 @@ A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript arch
 * [Underscore](http://underscorejs.org/)
 * [Mongoose](http://mongoosejs.com/)
 * [Bower](http://bower.io/)
+* [Socket.io](http://socket.io)
 
 ## Before You Begin
 Before you begin we recommend you read about the basic building blocks that assemble a MEAN application:
