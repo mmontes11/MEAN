@@ -72,9 +72,6 @@ controllers.controller('AdminUserCtrl',
 	                		$scope.notValidCredentials = true;
 	                	}
 	                });
-	          	SocketService.emit('USER_CONNECTED',{
-                	username: BrowserService.getSession('username')
-                });    
             }
         }
 
