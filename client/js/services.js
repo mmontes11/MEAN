@@ -4,36 +4,40 @@
 
 var services = angular.module('services', ['ngResource']);
 
-services.factory('AuthenticationService', function() {
+services.factory('AuthenticationService', function () {
     var auth = {
         isAuthenticated: false
     }
     return auth;
 });
 
-services.factory('UserService', function($http,$window,$cookies,Config) {
+services.factory('UserService', function ($http, $window, $cookies, Config) {
     return {
-        logIn: function(username, password) {
-            return $http.post(Config.apiUrl  + '/logIn', {username: username, password: password});
+        logIn: function (username, password) {
+            return $http.post(Config.apiUrl + '/logIn', {username: username, password: password});
         },
-        logOut: function() {
-            return $http.get(Config.apiUrl  + '/logOut');
+        logOut: function () {
+            return $http.get(Config.apiUrl + '/logOut');
         },
-        signUp: function(username, password, passwordConfirmation) {
-            return $http.post(Config.apiUrl  + '/signUp', {username: username, password: password, passwordConfirmation: passwordConfirmation });
+        signUp: function (username, password, passwordConfirmation) {
+            return $http.post(Config.apiUrl + '/signUp', {
+                username: username,
+                password: password,
+                passwordConfirmation: passwordConfirmation
+            });
         }
     }
 });
 
-services.factory('BrowserService', function($window,$cookies){
+services.factory('BrowserService', function ($window, $cookies) {
     return {
-        getSession: function (key){
+        getSession: function (key) {
             return $window.localStorage[key];
         },
-        setSession: function(key,value){
+        setSession: function (key, value) {
             $window.localStorage[key] = value;
         },
-        deleteSession: function(key){
+        deleteSession: function (key) {
             delete $window.localStorage[key];
         },
         remember: function (key, value) {
@@ -45,7 +49,7 @@ services.factory('BrowserService', function($window,$cookies){
         forget: function (name) {
             delete $cookies[name];
         },
-        scrollTop: function (){
+        scrollTop: function () {
             $window.scrollTo(0, 0);
         }
     }
@@ -60,7 +64,7 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
             }
             return config;
         },
-        requestError: function(rejection) {
+        requestError: function (rejection) {
             return $q.reject(rejection);
         },
         /* Set Authentication.isAuthenticated to true if 200 received */
@@ -71,7 +75,7 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
             return response || $q.when(response);
         },
         /* Revoke client authentication if 401 is received */
-        responseError: function(rejection) {
+        responseError: function (rejection) {
             if (rejection != null && rejection.status === 401 && (BrowserService.getSession('token') || AuthenticationService.isAuthenticated)) {
                 BrowserService.deleteSession('token');
                 AuthenticationService.isAuthenticated = false;
@@ -83,26 +87,26 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
 });
 
 services.factory('SocketService', function ($rootScope) {
-  var socket = io.connect();
-  return {
-    on: function (eventName, callback) {
-      socket.on(eventName, function () {  
-        var args = arguments;
-        $rootScope.$apply(function () {
-          callback.apply(socket, args);
-        });
-      });
-    },
-    emit: function (eventName, data, callback) {
-      socket.emit(eventName, data, function () {
-        var args = arguments;
-        $rootScope.$apply(function () {
-          if (callback) {
-            callback.apply(socket, args);
-          }
-        });
-      })
-    }
-  };
+    var socket = io.connect();
+    return {
+        on: function (eventName, callback) {
+            socket.on(eventName, function () {
+                var args = arguments;
+                $rootScope.$apply(function () {
+                    callback.apply(socket, args);
+                });
+            });
+        },
+        emit: function (eventName, data, callback) {
+            socket.emit(eventName, data, function () {
+                var args = arguments;
+                $rootScope.$apply(function () {
+                    if (callback) {
+                        callback.apply(socket, args);
+                    }
+                });
+            })
+        }
+    };
 });
 
