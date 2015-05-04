@@ -38,8 +38,9 @@ controllers.controller('NavBarCtrl', ['$scope', '$location','BrowserService','Au
     });
 }]);
 
-controllers.controller('AdminUserCtrl', ['$scope', '$location', 'BrowserService', 'UserService', 'AuthenticationService', 'Config',
-    function AdminUserCtrl($scope, $location, BrowserService, UserService, AuthenticationService,Config) {
+controllers.controller('AdminUserCtrl', 
+	['$scope', '$location', 'BrowserService', 'UserService', 'AuthenticationService', 'Config', 'SocketService',
+    function AdminUserCtrl($scope, $location, BrowserService, UserService, AuthenticationService,Config,SocketService) {
 
     	$scope.remember = false;
     	$scope.notValidCredentials = false;
@@ -64,13 +65,16 @@ controllers.controller('AdminUserCtrl', ['$scope', '$location', 'BrowserService'
 	                    BrowserService.setSession('token',data.token);
 	                    BrowserService.setSession('username',username);
 	                    $scope.notValidCredentials = false;
-	                    $location.path("/inputData");
+	                    $location.path(Config.defaultAuthRoute);
 	                })
 	                .error(function(data, status) {
 	                	if (status >= 400){
 	                		$scope.notValidCredentials = true;
 	                	}
 	                });
+	          	SocketService.emit('USER_CONNECTED',{
+                	username: BrowserService.getSession('username')
+                });    
             }
         }
 
@@ -123,23 +127,28 @@ controllers.controller('ExampleCtrl', ['$scope','BrowserService','SocketService'
 	$scope.users = [];
 	$scope.numUsers = 0;
 
-	SocketService.emit('USER_CONNECTED', {
-      username: BrowserService.getSession('username')
-    });
+	SocketService.emit('USER_CONNECTED',{
+		username: BrowserService.getSession('username')
+	});
+
+	SocketService.on('WELCOME', function(socketData){
+		$scope.users.push(socketData.username);
+    	$scope.numUsers = socketData.numUsers;
+    	console.log("Welcome "+socketData.username+" !!!");
+    	console.log("Total users: "+socketData.numUsers);
+	});
 
     SocketService.on('USER_JOINED', function(socketData){
     	$scope.users.push(socketData.username);
     	$scope.numUsers = socketData.numUsers;
-    	console.log("User connected!!!");
-    	console.log("User: "+socketData.username);
-    	console.log("Total users: "+socketData.numUsers);
+    	console.log('User connected: '+socketData.username);
+		console.log('Total connected users: '+socketData.numUsers);
     });
 
     SocketService.on('USER_LEFT', function(socketData){
     	delete $scope.users[socketData.username];
       	$scope.numUsers = socketData.numUsers;
-      	console.log("User disconnected");
-    	console.log("User: "+socketData.username);
-    	console.log("Total users: "+socketData.numUsers);
+    	console.log('User disconnected: '+socketData.username);
+		console.log('Total connected users: '+socketData.numUsers);
     });
 }]);
