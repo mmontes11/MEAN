@@ -4,13 +4,11 @@ var SALT_WORK_FACTOR = 10;
 
 var Schema = mongoose.Schema;
 
-// User schema
 var User = new Schema({
     username: {type: String, required: true, unique: true},
     password: {type: String, required: true}
 });
 
-// Bcrypt middleware on UserSchema
 User.pre('save', function (next) {
     var user = this;
 
@@ -27,7 +25,6 @@ User.pre('save', function (next) {
     });
 });
 
-//Password verification
 User.methods.comparePassword = function (password, cb) {
     bcrypt.compare(password, this.password, function (err, isMatch) {
         if (err) return cb(err);
@@ -35,8 +32,7 @@ User.methods.comparePassword = function (password, cb) {
     });
 };
 
-//Define Model
 var userModel = mongoose.model('User', User);
 
-//Export Model
+exports.userSchema = User;
 exports.userModel = userModel;

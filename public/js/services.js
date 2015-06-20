@@ -14,13 +14,13 @@ services.factory('AuthenticationService', function () {
 services.factory('UserService', function ($http, $window, $cookies, Config) {
     return {
         logIn: function (username, password) {
-            return $http.post(Config.apiUrl + '/logIn', {username: username, password: password});
+            return $http.post(Config.apiUrl + '/user/logIn', {username: username, password: password});
         },
         logOut: function () {
-            return $http.get(Config.apiUrl + '/logOut');
+            return $http.get(Config.apiUrl + '/user/logOut');
         },
         signUp: function (username, password, passwordConfirmation) {
-            return $http.post(Config.apiUrl + '/signUp', {
+            return $http.post(Config.apiUrl + '/user/signUp', {
                 username: username,
                 password: password,
                 passwordConfirmation: passwordConfirmation
@@ -74,7 +74,7 @@ services.factory('TokenInterceptor', function ($q, $window, $location, Authentic
             }
             return response || $q.when(response);
         },
-        /* Revoke client authentication if 401 is received */
+        /* Revoke public authentication if 401 is received */
         responseError: function (rejection) {
             if (rejection != null && rejection.status === 401 && (BrowserService.getSession('token') || AuthenticationService.isAuthenticated)) {
                 BrowserService.deleteSession('token');

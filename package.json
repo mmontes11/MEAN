@@ -16,9 +16,11 @@
     "morgan": "~1.0.1",
     "method-override": "~2.1.1",
     "nodemon": "~1.2.1",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "file-stream-rotator": "latest"
   },
   "scripts": {
+    "prestart": "npm install",
     "start": "nodemon server.js"
   }
 }

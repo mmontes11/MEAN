@@ -1,6 +1,7 @@
-var users = [];
-var numUsers = 0;
-var addedUser = false;
+var log = require('./log'),
+    users = [],
+    numUsers = 0,
+    addedUser = false;
 
 module.exports = function (socket) {
 
@@ -22,8 +23,12 @@ module.exports = function (socket) {
                 numUsers: numUsers
             });
 
-            console.log('User connected: ' + socket.username);
-            console.log('Total connected users: ' + numUsers);
+            var messageUser = 'User connected: ' + socket.username;
+            var messageTotal = 'Total connected users: ' + numUsers;
+            console.log(messageUser);
+            console.log(messageTotal);
+            log.write(messageUser);
+            log.write(messageTotal);
         }
     });
 
@@ -37,8 +42,12 @@ module.exports = function (socket) {
                 numUsers: numUsers
             });
 
-            console.log('User disconnected: ' + socket.username);
-            console.log('Total connected users: ' + numUsers);
+            var messageUser = 'User disconnected: ' + socket.username;
+            var messageTotal = 'Total connected users: ' + numUsers;
+            console.log(messageUser);
+            console.log(messageTotal);
+            log.write(messageUser);
+            log.write(messageTotal);
         }
     });
 }

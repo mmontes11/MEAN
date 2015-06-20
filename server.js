@@ -8,34 +8,41 @@ var express = require('express'),
     http = require('http'),
     server = http.createServer(app),
     io = require('socket.io').listen(server),
-    socket = require('./server/socket')
+    socket = require('./server/utils/socket')
     mongoose = require('mongoose'),
     port = process.env.PORT || 8080,
     db = require('./config/configDB'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
-    jwt = require('express-jwt');
+
 
 // config  ======================================================================
-app.use(express.static(__dirname + '/client'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(morgan());
+
+
+//configure log =================================================================
+var log = require('./server/utils/log');
+app.use(morgan({stream: log}));
+
 
 // db config  ===================================================================
 mongoose.connect(db.url);
 
 // routes =======================================================================
-require('./server/routes')(app, jwt);
-
-//cors ==========================================================================
-require('./server/cors')(app);
+var rootRouter = require('./server/routers/root');
+var userRouter = require('./server/routers/user');
+app.use('/', rootRouter);
+app.use('/user', userRouter);
 
 // listen (start app with node server.js) =======================================
 io.sockets.on('connection', socket);
 server.listen(server_port, server_ip_address, function () {
-    console.log("Server listening on " + server_ip_address + ", server_port " + server_port);
+    var message = "Server listening on " + server_ip_address + ", server_port " + server_port;
+    console.log(message);
+    log.write(message);
 });
