@@ -1,6 +1,6 @@
 // OpenShift ===================================================================
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 // set up ======================================================================
 var express = require('express'),
@@ -8,26 +8,25 @@ var express = require('express'),
     http = require('http'),
     server = http.createServer(app),
     io = require('socket.io').listen(server),
-    socket = require('./server/utils/socket')
+    socket = require('./server/utils/socket'),
     mongoose = require('mongoose'),
     port = process.env.PORT || 8080,
     db = require('./config/configDB'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),
-    morgan = require('morgan'),
+    morgan = require('morgan');
 
 
 // config  ======================================================================
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
-app.use(bodyParser.json({type: 'application/vnd.api+json'}));
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(bodyParser.json({type: 'application/json'}));
 
 
 //configure log =================================================================
 var log = require('./server/utils/log');
-app.use(morgan({stream: log}));
+app.use(morgan('combined',{stream:log.accessLogStream}));
 
 
 // db config  ===================================================================

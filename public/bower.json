@@ -11,7 +11,8 @@
     "bootstrap": "latest",
     "underscore": "latest",
     "socket.io-client": "latest",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "requirejs-domready": "latest"
   }
 }
 

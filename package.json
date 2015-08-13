@@ -1,25 +1,24 @@
 {
   "name": "MEAN",
   "version": "0.0.1",
-  "description": "Description",
+  "repository": "https://github.com/mmontes11/MEAN",
   "main": "server.js",
   "author": "You",
   "dependencies": {
-    "express-jwt": "~0.2.1",
-    "jsonwebtoken": "~0.4.0",
+    "mongoose": "latest",
+    "express": "latest",
+    "express-jwt": "latest",
+    "jsonwebtoken": "latest",
     "bcrypt-nodejs": "latest",
-    "express": "~4.6.1",
-    "mongoose": "~3.8.13",
-    "json": "0.0.14",
-    "body-parser": "~1.4.3",
-    "morgan": "~1.0.1",
-    "method-override": "~2.1.1",
-    "nodemon": "~1.2.1",
+    "body-parser": "latest",
     "socket.io": "latest",
+    "morgan": "latest",
     "file-stream-rotator": "latest"
   },
+  "devDependencies":{
+    "nodemon": "latest"
+  },
   "scripts": {
-    "prestart": "npm install",
     "start": "nodemon server.js"
   }
 }

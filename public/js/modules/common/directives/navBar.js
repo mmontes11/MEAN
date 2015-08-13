@@ -1,16 +1,14 @@
 'use strict';
 
 define([
-    'angular'
-], function(angular){
-    var moduleName = 'directives';
-    angular
-        .module('directives', [])
-        .directive('navbar', ['$location', function ($location) {
+    '../module'
+], function(module){
+    module
+        .directive('navBar', ['$location', function ($location) {
             return {
                 restrict: "E",
                 controller: "NavBarCtrl",
-                templateUrl: "partials/directives/navbar.html",
+                templateUrl: "partials/directives/navBar.html",
                 link: function (scope) {
                     scope.isActive = function (path) {
                         return path === $location.path();
@@ -18,5 +16,4 @@ define([
                 }
             };
         }]);
-    return moduleName;
 });

@@ -1,6 +1,6 @@
 {
   "name": "MEAN",
-  "private": true,
+  "repository": "https://github.com/mmontes11/MEAN",
   "version": "0.0.1",
   "devDependencies": {
     "http-server": "^0.6.1",
