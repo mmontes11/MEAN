@@ -2,7 +2,6 @@
   "name": "MEAN",
   "version": "0.0.1",
   "description": "Description",
-  "repository": "https://github.com/mmontes11/mean_archetype",
   "main": "server.js",
   "author": "You",
   "dependencies": {
