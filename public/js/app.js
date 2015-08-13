@@ -18,7 +18,7 @@ require([
             .constant("Config", {
                 'apiUrl': 'http://localhost:8080',
                 'defaultNonAuthRoute': '/logIn',
-                'defaultAuthRoute': 'example'
+                'defaultAuthRoute': '/example'
             })
             .config(['$locationProvider', '$routeProvider', function ($location, $routeProvider) {
                 $routeProvider
