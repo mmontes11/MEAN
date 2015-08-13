@@ -13,6 +13,7 @@ A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript arch
 * [Mongoose](http://mongoosejs.com/)
 * [Bower](http://bower.io/)
 * [Socket.io](http://socket.io)
+* [RequireJS](http://requirejs.org/)
 
 ## Before You Begin
 Before you begin we recommend you read about the basic building blocks that assemble a MEAN application:
