@@ -14,7 +14,7 @@ require.config({
         domReady: '../../bower_components/requirejs-domready/domReady'
     },
     shim: {
-        'jquery': {
+        jquery: {
             exports: 'jquery'
         },
         underscore: {
