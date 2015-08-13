@@ -13,7 +13,6 @@ var express = require('express'),
     port = process.env.PORT || 8080,
     db = require('./config/configDB'),
     bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
     morgan = require('morgan');
 
 

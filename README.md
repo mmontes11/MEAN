@@ -1,8 +1,8 @@
 # MEAN-archetype
 
-A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript archetype with token authentication.
+A simple MEAN(MongoDB + Express + AngularJS + NodeJS) full stack Javascript archetype.
 
-### Tecnologies
+### Technologies
 * [MongoDB](http://www.mongodb.org/)
 * [Express](http://expressjs.com/)
 * [AngularJS](https://angularjs.org/)
