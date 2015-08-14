@@ -6,13 +6,13 @@ var express = require('express'),
     io = require('socket.io').listen(server),
     socket = require('./server/utils/socket'),
     mongoose = require('mongoose'),
-    port = process.env.PORT || 8080,
     configDB = require('./config/configDB'),
     configServer = require('./config/configServer'),
-    server_port = process.env.OPENSHIFT_NODEJS_PORT || configServer.IP || 8080,
-    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || configServer.port || '127.0.0.1',
+    server_ip_address = process.env.OPENSHIFT_NODEJS_PORT || configServer.IP,
+    server_port = process.env.OPENSHIFT_NODEJS_IP || configServer.port,
     bodyParser = require('body-parser'),
     morgan = require('morgan');
+
 
 // config  ======================================================================
 app.use(express.static(__dirname + '/public'));

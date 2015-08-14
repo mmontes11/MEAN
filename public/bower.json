@@ -12,7 +12,8 @@
     "underscore": "latest",
     "socket.io-client": "latest",
     "requirejs": "latest",
-    "requirejs-domready": "latest"
+    "requirejs-domready": "latest",
+    "angular-base64": "latest"
   }
 }
 

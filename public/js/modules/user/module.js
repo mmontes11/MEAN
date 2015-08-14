@@ -2,7 +2,8 @@
 
 define([
     'angular',
-    'angularResource'
+    'angularResource',
+    'base64'
 ], function(angular){
-    return angular.module('app.user', ['ngResource','app.common']);
+    return angular.module('app.user', ['ngResource','base64','app.common']);
 });

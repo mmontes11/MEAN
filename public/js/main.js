@@ -11,7 +11,8 @@ require.config({
         angularBootstrap: '../../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         socketIO: '../../bower_components/socket.io-client/socket.io',
         require: '../../bower_components/requirejs/require',
-        domReady: '../../bower_components/requirejs-domready/domReady'
+        domReady: '../../bower_components/requirejs-domready/domReady',
+        base64: '../../bower_components/angular-base64/angular-base64'
     },
     shim: {
         jquery: {

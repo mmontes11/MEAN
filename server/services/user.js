@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
 var secret = require('../../config/secret');
 var db = require('../../db/models/userModel');
+var base64 = require('js-base64').Base64;
 
 exports.logIn = function (req, res) {
     var username = req.body.username || '';
@@ -9,6 +10,7 @@ exports.logIn = function (req, res) {
     if (username == '' || password == '') {
         return res.sendStatus(401);
     }
+    password= base64.decode(password);
 
     db.userModel.findOne({username: username}, function (err, user) {
         if (err) {
@@ -50,7 +52,7 @@ exports.signUp = function (req, res) {
 
     var user = new db.userModel();
     user.username = username;
-    user.password = password;
+    user.password = base64.decode(password);
 
     user.save(function (err) {
         if (err) {

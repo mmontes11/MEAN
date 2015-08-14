@@ -13,7 +13,8 @@
     "body-parser": "latest",
     "socket.io": "latest",
     "morgan": "latest",
-    "file-stream-rotator": "latest"
+    "file-stream-rotator": "latest",
+    "js-base64": "latest"
   },
   "devDependencies":{
     "nodemon": "latest"
