@@ -8,8 +8,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/inputData" ng-show="isAuthenticated()">MEAN</a>
             <a class="navbar-brand" href="#/logIn" ng-show="!isAuthenticated()">MEAN</a>
+            <a class="navbar-brand" href="#/example" ng-show="isAuthenticated()">MEAN</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <div class="navbar-form navbar-right" ng-show="isAuthenticated()">
@@ -18,7 +18,6 @@
                 </button>
             </div>
             <p class="navbar-right navbar-text" ng-show="isAuthenticated()">{{currentUser}}</p>
-
             <div ng-show="isAuthenticated()">
                 <ul class="nav navbar-nav">
                     <li ng-class="{ active: isActive('/example') }">

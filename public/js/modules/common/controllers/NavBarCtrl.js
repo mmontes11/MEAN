@@ -4,8 +4,8 @@ define([
     '../module'
 ], function(module){
     module
-        .controller('NavBarCtrl', ['$scope', '$location', 'BrowserService', 'AuthenticationService', 'UserService', 'SocketService',
-            function ($scope, $location, BrowserService, AuthenticationService, UserService, SocketService) {
+        .controller('NavBarCtrl', ['$scope', '$location', 'BrowserService', 'AuthenticationService', 'UserService', 'SocketService','Config',
+            function ($scope, $location, BrowserService, AuthenticationService, UserService, SocketService, Config) {
 
                 $scope.isAuthenticated = function () {
                     return AuthenticationService.isAuthenticated;
@@ -13,7 +13,7 @@ define([
 
                 $scope.logIn = function () {
                     if (!AuthenticationService.isAuthenticated) {
-                        $location.path("/logIn");
+                        $location.path(Config.defaultNonAuthRoute);
                     }
                 };
 
@@ -21,12 +21,12 @@ define([
                     if (AuthenticationService.isAuthenticated) {
                         SocketService.emit('USER_DISCONNECTED');
                         UserService.logOut()
-                            .then(function (data) {
+                            .then(function () {
                                 AuthenticationService.isAuthenticated = false;
                                 BrowserService.deleteSession('token');
                                 BrowserService.deleteSession('username');
                                 $scope.currentUser = "";
-                                $location.path("/logIn");
+                                $location.path(Config.defaultNonAuthRoute);
                             });
                     }
                 };

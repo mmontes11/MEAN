@@ -12,6 +12,3 @@ var accessLogStream = fileStreamRotator.getStream({
 
 exports.accessLogStream = accessLogStream;
 exports.logDirectory = logDirectory;
-exports.write = function(message){
-    accessLogStream.write(new Date()+" "+message+"\n");
-};

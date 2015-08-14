@@ -27,8 +27,6 @@ module.exports = function (socket) {
             var messageTotal = 'Total connected users: ' + numUsers;
             console.log(messageUser);
             console.log(messageTotal);
-            log.write(messageUser);
-            log.write(messageTotal);
         }
     });
 
@@ -46,8 +44,6 @@ module.exports = function (socket) {
             var messageTotal = 'Total connected users: ' + numUsers;
             console.log(messageUser);
             console.log(messageTotal);
-            log.write(messageUser);
-            log.write(messageTotal);
         }
     });
 }
