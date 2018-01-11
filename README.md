@@ -32,18 +32,18 @@ Make sure you have installed all of the following prerequisites on your developm
 ### Instructions
 * First, you'll need to download all dependecies for both the client and the server:
 ```bash
-$ cd mean-archetype
+$ cd MEAN
 $ npm install
 $ cd client
 $ npm install
 ```
 * After that, you'll have to configure your MongoDB URL in the next file:
 ```bash
-mean-archetype/config/configDB.js
+MEAN/config/configDB.js
 ```
 * The next step is create your own encription key at:
 ```bash
-mean-archetype/config/secret.js
+MEAN/config/secret.js
 ```
 * Finally, run your server executing the command below:
 ```bash
